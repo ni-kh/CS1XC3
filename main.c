@@ -4,6 +4,12 @@
 #include "time.h"
 #include "course.h"
 
+/**
+ * @brief This is the main function which generates a course called "MATH101", makes use of the other functions in its library, and ultimately prints the top and passing students as outputs. 
+ *
+ * @return int
+ */
+
 int main()
 {
   srand((unsigned) time(NULL));
