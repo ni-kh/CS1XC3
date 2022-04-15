@@ -12,7 +12,9 @@
 void add_grade(Student* student, double grade)
 {
   student->num_grades++;
-  if (student->num_grades == 1) student->grades = calloc(1, sizeof(double));
+  if (student->num_grades == 1) student->grades = calloc(1, sizeof(double)); 
+  /*^^Calloc is used here because memory space only needs to be allocated to 1 item. 
+  Past 1 item, realloc should be used to expand on the previously allocated memory, which it is below.*/
   else 
   {
     student->grades = 
@@ -80,11 +82,12 @@ Student* generate_random_student(int grades)
 
   for (int i = 0; i < 10; i++) new_student->id[i] = (char) ((rand() % 10) + 48);
   new_student->id[10] = '\0';
+  //^^This for-loop is adding a NULL character to the end of all of the assigned strings to determine when each word ends.
 
   for (int i = 0; i < grades; i++) 
   {
     add_grade(new_student, (double) (25 + (rand() % 75)));
   }
-
+  //^^Here, this for-loop is randomly adding some marks onto students' marks.
   return new_student;
 }

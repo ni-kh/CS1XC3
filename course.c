@@ -13,12 +13,14 @@ void enroll_student(Course *course, Student *student)
   course->total_students++;
   if (course->total_students == 1) 
   {
-    course->students = calloc(1, sizeof(Student));
+    course->students = calloc(1, sizeof(Student)); //Calloc is used here because there is only 1 student to locate in memory.
   }
   else 
   {
     course->students = 
       realloc(course->students, course->total_students * sizeof(Student)); 
+      /*Here, instead of calloc, realloc must be used because there has already been memory space filled up 
+      by 1 student before. This is just going to add more students on top of that in the same memory location.*/
   }
   course->students[course->total_students - 1] = *student;
 }
@@ -47,7 +49,7 @@ void print_course(Course* course)
  */
 Student* top_student(Course* course)
 {
-  if (course->total_students == 0) return NULL;
+  if (course->total_students == 0) return NULL; 
  
   double student_average = 0;
   double max_average = average(&course->students[0]);
@@ -61,8 +63,8 @@ Student* top_student(Course* course)
       max_average = student_average;
       student = &course->students[i];
     }   
-  }
-
+  } 
+  //^^To find the top student, this for-loop is used to iterate through all items.
   return student;
 }
 
@@ -83,7 +85,7 @@ Student *passing(Course* course, int *total_passing)
   for (int i = 0; i < course->total_students; i++) 
     if (average(&course->students[i]) >= 50) count++;
   
-  passing = calloc(count, sizeof(Student));
+  passing = calloc(count, sizeof(Student)); //Allocates memory to the number of 'count'.
 
   int j = 0;
   for (int i = 0; i < course->total_students; i++)
